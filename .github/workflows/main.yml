@@ -2,7 +2,7 @@
 on:
  workflow_dispatch:
  schedule:
-   - cron:  '0 */12 * * *'
+   - cron:  '0 8 * * 1'
 
 permissions:
   contents: write
@@ -31,12 +31,12 @@ jobs:
      #env: 
       #GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
 
-     run: jupyter execute pipeline-finished.ipynb
+     run: jupyter execute InspectionDatabase.ipynb
 
    # Step 4   
    - name: Commit files
      run: |
-       git config remote.origin.url https://github.com/Kunle-Falayi/data-pipelining.git
+       git config remote.origin.url https://github.com/Kunle-Falayi/restaurants-scraper1.git
        git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
        git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
        git add .
