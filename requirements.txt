@@ -11,7 +11,6 @@ bitarray==2.8.0
 bleach==6.1.0
 camelot-py==0.9.0
 certifi==2023.7.22
-cffi @ file:///private/tmp/cffi-20231211-41533-ztvmir/cffi-1.16.0
 chardet==5.1.0
 charset-normalizer==3.2.0
 click==8.1.6
@@ -69,14 +68,12 @@ prompt-toolkit==3.0.39
 psutil==5.9.5
 ptyprocess==0.7.0
 pure-eval==0.2.2
-pycparser @ file:///private/tmp/pycparser-20231211-26022-8sypv1/pycparser-2.21
 pycryptodome==3.18.0
 Pygments==2.15.1
 PyMuPDF==1.22.5
 pyparsing==3.1.1
 PyPDF4==1.27.0
 python-dateutil==2.8.2
-python3-ghostscript @ file:///Users/OFalayi/Downloads/python3_ghostscript-0.5.0-py3-none-any.whl#sha256=a474879da1271b1ecab411e17bdafb475b81c288d2cf67f8ff7871354eaa6975
 pytz==2023.3
 PyYAML==6.0
 pyzmq==25.1.0
@@ -91,7 +88,6 @@ tinycss2==1.2.1
 tornado==6.3.2
 tqdm==4.66.1
 traitlets==5.9.0
-typing_extensions @ file:///private/tmp/python-typing-extensions-20230602-7526-etcnat/typing_extensions-4.6.3/dist/typing_extensions-4.6.3-py3-none-any.whl
 tzdata==2023.3
 urllib3==2.0.7
 wcwidth==0.2.6
