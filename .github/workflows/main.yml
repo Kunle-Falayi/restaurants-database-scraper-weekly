@@ -21,24 +21,22 @@ jobs:
 
       # Step 2: Install requirements, so Python script can run
       - name: Install requirements
-        # this may change depending on how we handle dependencies
         run: pip install -r requirements.txt
 
-      # Step 3: Install Python 3 kernel for Jupyter
+      # Step 3: Install ipykernel package
+      - name: Install ipykernel
+        run: pip install ipykernel
+
+      # Step 4: Set up Python 3 kernel for Jupyter
       - name: Set up Python 3 kernel
         run: python3 -m ipykernel install --user --name=python3
 
-      # Step 4: Run Jupyter Notebook with specified kernel
+      # Step 5: Run Jupyter Notebook with specified kernel
       - name: Run scraper
         run: jupyter nbconvert --ExecutePreprocessor.kernel_name=python3 --to notebook --execute InspectionDatabase.ipynb
 
-      # Step 5: Commit files
+      # Step 6: Commit files
       - name: Commit files
         run: |
           git config remote.origin.url  https://github.com/Kunle-Falayi/restaurants-scraper1.git
-          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
-          git add .
-          git commit -m "Automated commit from GitHub Actions" || exit 0
-          git pull
-          git push
+          git
