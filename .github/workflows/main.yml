@@ -28,7 +28,6 @@ jobs:
    # Step 3   
    - name: Run scraper
 
-
   # Optional: If you are publishing to Google sheets, uncomment these next 2 lines
      #env: 
       #GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
@@ -38,11 +37,12 @@ jobs:
    # Step 4   
    - name: Commit files
      run: |
-       git config remote.origin.url https://github.com/Kunle-Falayi/restaurants-scraper1.git
+       git config remote.origin.url  https://github.com/Kunle-Falayi/restaurants-scraper1.git
        git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
        git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
        git add .
        git commit -m "Automated commit from GitHub Actions" || exit 0
        git pull
        git push 
+   
     
