@@ -22,7 +22,7 @@ def publish_to_google_sheets():
     client = gspread.authorize(creds)
 
     # Access the Google Sheets spreadsheet by its title
-    spreadsheet = client.open('Your Spreadsheet Title')
+    spreadsheet = client.open('Restaurant_inspection_database(auto_scraper)')
 
     # Access the specific worksheet by its title
     worksheet = spreadsheet.worksheet('Sheet1')
