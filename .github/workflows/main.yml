@@ -1,4 +1,4 @@
-name: Scrape latest data
+name: Scrape and Publish to Google Sheets
 
 on:
   workflow_dispatch:
@@ -11,36 +11,29 @@ permissions:
   pull-requests: write
 
 jobs:
-  scrape:
+  scrape_and_publish:
     runs-on: ubuntu-latest
-    env:
-      TZ: 'America/Phoenix'  # Set the time zone to Arizona time
     steps:
-      # Step 1: Prepare the environment
       - name: Check out this repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
-      # Step 2: Install requirements, so Python script can run
-      - name: Install requirements
-        # this may change depending on how we handle dependencies
-        run: pip install -r requirements.txt
 
-      # Step 3   
-      - name: Run scraper
-        # Optional: If you are publishing to Google sheets, uncomment these next 2 lines
-        # env: 
-        #   GOOGLE_SECRET_KEY: ${{ secrets.GOOGLE_SECRET_KEY }}
-        run: jupyter execute InspectionDatabase.ipynb
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-      # Step 4   
-      - name: Commit files
+      - name: Install dependencies
         run: |
-          git config remote.origin.url https://github.com/Kunle-Falayi/restaurants-scraper1.git
-          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
-          git add .
-          git commit -m "Automated commit from GitHub Actions" || exit 0
-          git pull
-          git push 
+          pip install -r requirements.txt
+
+      - name: Run scraper
+        run: |
+          # Run your scraper script here
+
+      - name: Publish to Google Sheets
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          python publish_to_google_sheets.py  # name for google sheeps publishing script
