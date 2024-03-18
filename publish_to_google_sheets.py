@@ -15,7 +15,7 @@ def publish_to_google_sheets():
     client = gspread.authorize(creds)
 
     # Open the Google Sheets document by its title
-    sheet = client.open('Your Google Sheets Document Title').sheet1
+    sheet = client.open('Restaurant_inspection_database(auto_scraper)').sheet1
 
     # Example: Write data to a specific cell
     sheet.update('A1', 'Hello, Google Sheets!')
