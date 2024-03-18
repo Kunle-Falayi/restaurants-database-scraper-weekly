@@ -94,3 +94,7 @@ wcwidth==0.2.6
 webencodings==0.5.1
 yarg==0.1.9
 yarl==1.9.2
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
