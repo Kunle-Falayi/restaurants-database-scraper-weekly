@@ -26,7 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install beautifulsoup4 requests numpy pandas google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+          pip install beautifulsoup4 requests numpy pandas google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client gspread
 
       - name: Run scraper
         run: |
@@ -36,4 +36,4 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
         run: |
-          python publish_to_google_sheets.py  # name for google sheeps publishing script
+          python publish_to_google_sheets.py  # name for google sheets publishing script
