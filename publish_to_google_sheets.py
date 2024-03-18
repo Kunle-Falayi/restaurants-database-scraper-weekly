@@ -6,7 +6,17 @@ import json
 
 def publish_to_google_sheets():
     # Load the Google service account key from environment variable
-    creds_dict = json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_KEY'))
+    creds_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_KEY')
+
+    # Print out the loaded JSON (for debugging)
+    print("Loaded JSON:", creds_json)
+
+    # Attempt to load the JSON into a dictionary
+    try:
+        creds_dict = json.loads(creds_json)
+    except json.JSONDecodeError as e:
+        print("Error decoding JSON:", e)
+        return
 
     # Create a Google Credentials object
     creds = Credentials.from_service_account_info(creds_dict)
