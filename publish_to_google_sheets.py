@@ -1,40 +1,24 @@
+import gspread
+from google.auth.transport.requests import Request
+from google.oauth2.service_account import Credentials
 import os
 import json
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
 def publish_to_google_sheets():
-    # Load the Google Service Account Key from the environment
-    key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-    
-    # Load the credentials from the JSON file
-    with open(key_path, 'r') as key_file:
-        creds_dict = json.load(key_file)
+    # Load the Google service account key from environment variable
+    creds_dict = json.loads(os.getenv('GOOGLE_SERVICE_ACCOUNT_KEY'))
 
-    # Define the scope for Google Sheets API
-    scope = ['https://spreadsheets.google.com/feeds',
-             'https://www.googleapis.com/auth/drive']
-
-    # Authenticate using the Service Account Credentials
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    # Create a Google Credentials object
+    creds = Credentials.from_service_account_info(creds_dict)
 
     # Authorize the client
     client = gspread.authorize(creds)
 
-    # Access the Google Sheets spreadsheet by its title
-    spreadsheet = client.open('Restaurant_inspection_database(auto_scraper)')
+    # Open the Google Sheets document by its title
+    sheet = client.open('Your Google Sheets Document Title').sheet1
 
-    # Access the specific worksheet by its title
-    worksheet = spreadsheet.worksheet('Sheet1')
-
-    # Example: Update a cell with a value
-    worksheet.update('A1', 'Hello, Google Sheets!')
-
-    # Example: Append rows to the worksheet
-    data = [['John', 25], ['Jane', 30], ['Doe', 28]]
-    worksheet.append_rows(data)
-
-    print("Data published to Google Sheets successfully!")
+    # Example: Write data to a specific cell
+    sheet.update('A1', 'Hello, Google Sheets!')
 
 if __name__ == "__main__":
     publish_to_google_sheets()
