@@ -1,3 +1,5 @@
+import os
+import json  # Import the json module
 import gspread
 from google.oauth2 import service_account
 
