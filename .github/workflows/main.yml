@@ -28,8 +28,11 @@ jobs:
         run: |
           pip install beautifulsoup4 requests numpy pandas google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 
-      - name: Debug Google Service Account Key
-        run: echo "Google Service Account Key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}"
+      - name: Set up Google Service Account Key
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$GOOGLE_SERVICE_ACCOUNT_KEY" > key.json
 
       - name: Run scraper
         run: |
@@ -37,6 +40,6 @@ jobs:
 
       - name: Publish to Google Sheets
         env:
-          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_APPLICATION_CREDENTIALS: key.json
         run: |
-          python publish_to_google_sheets.py  # name for google sheeps publishing script
+          python publish_to_google_sheets.py  # name for google sheets publishing script
