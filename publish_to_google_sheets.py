@@ -7,6 +7,8 @@ import json
 def publish_to_google_sheets():
     # Load the Google service account key from environment variable
     creds_json = os.getenv('GOOGLE_SERVICE_ACCOUNT_KEY')
+    print("Loaded JSON:", creds_json)
+
 
     # Print out the loaded JSON (for debugging)
     print("Loaded JSON:", creds_json)
