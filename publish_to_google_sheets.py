@@ -1,4 +1,5 @@
 import gspread
+from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 import os
 import json
@@ -12,7 +13,8 @@ def publish_to_google_sheets():
 
     # Attempt to load the JSON into a dictionary
     try:
-        creds_dict = json.loads(creds_json)
+        # Remove newlines and load JSON
+        creds_dict = json.loads(creds_json.replace('\n', ''))
     except json.JSONDecodeError as e:
         print("Error decoding JSON:", e)
         return
@@ -23,14 +25,11 @@ def publish_to_google_sheets():
     # Authorize the client
     client = gspread.authorize(creds)
 
-    try:
-        # Open the Google Sheets document by its title
-        sheet = client.open('Restaurant_inspection_database(auto_scraper)').sheet1
+    # Open the Google Sheets document by its title
+    sheet = client.open('Restaurant_inspection_database(auto_scraper)').sheet1
 
-        # Example: Write data to a specific cell
-        sheet.update('A1', 'Hello, Google Sheets!')
-    except Exception as e:
-        print("Error updating Google Sheets:", e)
+    # Example: Write data to a specific cell
+    sheet.update('A1', 'Hello, Google Sheets!')
 
 if __name__ == "__main__":
     publish_to_google_sheets()
