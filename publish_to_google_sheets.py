@@ -1,5 +1,4 @@
 import gspread
-from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 import os
 import json
@@ -24,11 +23,14 @@ def publish_to_google_sheets():
     # Authorize the client
     client = gspread.authorize(creds)
 
-    # Open the Google Sheets document by its title
-    sheet = client.open('Restaurant_inspection_database(auto_scraper)').sheet1
+    try:
+        # Open the Google Sheets document by its title
+        sheet = client.open('Restaurant_inspection_database(auto_scraper)').sheet1
 
-    # Example: Write data to a specific cell
-    sheet.update('A1', 'Hello, Google Sheets!')
+        # Example: Write data to a specific cell
+        sheet.update('A1', 'Hello, Google Sheets!')
+    except Exception as e:
+        print("Error updating Google Sheets:", e)
 
 if __name__ == "__main__":
     publish_to_google_sheets()
