@@ -36,4 +36,5 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
         run: |
-          python publish_to_google_sheets.py  # name for google sheet publishing script
+          echo "$GOOGLE_SERVICE_ACCOUNT_KEY"  # Print the key for debugging
+          python publish_to_google_sheets.py  # Execute your script
