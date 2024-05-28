@@ -1,0 +1,33 @@
+name: Run Scraper
+
+on:
+  schedule:
+    - cron: '0 17 * * 1' # This runs every Monday at 5 PM UTC (10 AM MST)
+  push:
+    branches:
+      - main # Trigger on push to the main branch
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install gspread oauth2client pandas beautifulsoup4
+
+    - name: Run scraper script
+      env:
+        GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+      run: |
+        echo "$GOOGLE_SHEETS_CREDENTIALS" > credentials.json
+        python scraper.py
